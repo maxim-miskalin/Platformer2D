@@ -7,12 +7,12 @@ public class PocketSlime : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.Died.AddListener(SpawnCoin);
+        _health.Died += SpawnCoin;
     }
 
     private void OnDisable()
     {
-        _health.Died.RemoveListener(SpawnCoin);
+        _health.Died -= SpawnCoin;
     }
 
     private void SpawnCoin(Health _)

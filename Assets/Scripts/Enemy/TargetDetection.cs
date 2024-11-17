@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class TargetDetection : MonoBehaviour
 {
-    public UnityEvent<Collider2D> Locate;
+    public event Action<Collider2D> Locate;
 
     [SerializeField] private float _detectionRadius = 6f;
     [SerializeField] private LayerMask _playerLayer;
@@ -15,22 +15,22 @@ public class TargetDetection : MonoBehaviour
 
         if (target != null)
         {
-            if (CheckForHealth(target))
+            if (DiscoverHealth(target))
             {
-                Locate.Invoke(target);
+                Locate?.Invoke(target);
             }
             else
             {
-                Locate.Invoke(null);
+                Locate?.Invoke(null);
             }
         }
         else
         {
-            Locate.Invoke(null);
+            Locate?.Invoke(null);
         }
     }
 
-    private bool CheckForHealth(Collider2D target)
+    private bool DiscoverHealth(Collider2D target)
     {
         if (target != null && target.TryGetComponent(out Health health))
         {

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class HealthView : MonoBehaviour
 {
@@ -15,12 +14,12 @@ public abstract class HealthView : MonoBehaviour
 
     private void OnEnable()
     {
-        Health.ValueChanged.AddListener(OnChangeValue);
+        Health.ValueChanged += OnChangeValue;
     }
 
     private void OnDisable()
     {
-        Health.ValueChanged.RemoveListener(OnChangeValue);
+        Health.ValueChanged -= OnChangeValue;
     }
 
     protected void SetColorIndicator()

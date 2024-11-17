@@ -19,12 +19,12 @@ public class MoverSlime : Mover
 
     private void OnEnable()
     {
-        _targetDetection.Locate.AddListener(MovingTowardsGoal);
+        _targetDetection.Locate += MovingTowardsGoal;
     }
 
     private void OnDisable()
     {
-        _targetDetection.Locate.RemoveListener(MovingTowardsGoal);
+        _targetDetection.Locate -= MovingTowardsGoal;
     }
 
     private void Start()
@@ -39,14 +39,14 @@ public class MoverSlime : Mover
     {
         if (Vector2.Distance(transform.position, _target.position) > _minDistantionToPoint)
         {
-            if (IsGround)
+            if (_checkGround.IsGround)
             {
                 Vector2 direction = (_target.position - transform.position).normalized;
                 direction.Normalize();
                 Move(direction);
             }
 
-            if (IsGround)
+            if (_checkGround.IsGround)
                 Jump();
         }
         else

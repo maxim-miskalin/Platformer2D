@@ -1503,7 +1503,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -74497,6 +74497,7 @@ GameObject:
   - component: {fileID: 1460057302}
   - component: {fileID: 1460057301}
   - component: {fileID: 1460057300}
+  - component: {fileID: 1460057305}
   m_Layer: 7
   m_Name: GroundMap
   m_TagString: Ground
@@ -81934,6 +81935,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1460057305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460057298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58104d348c0c3284b88f558ac5567ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1520618053
 GameObject:
   m_ObjectHideFlags: 0

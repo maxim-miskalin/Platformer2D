@@ -1,11 +1,16 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-public abstract class Item : MonoBehaviour
+public class Item : MonoBehaviour
 {
     [SerializeField] protected float Value;
 
-    public UnityEvent<Item> Disappear;
+    public event Action<Item> Destroyed;
 
-    public abstract float ToDestroyed();
+    public float Destroy()
+    {
+        Destroyed?.Invoke(this);
+        Destroy(gameObject);
+        return Value;
+    }
 }

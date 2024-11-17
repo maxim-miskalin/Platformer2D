@@ -8,12 +8,12 @@ public class PocketView : MonoBehaviour
 
     private void OnEnable()
     {
-        _pocket.ValueChanged.AddListener(DisplayText);
+        _pocket.ValueChanged += DisplayText;
     }
 
     private void OnDisable()
     {
-        _pocket.ValueChanged.RemoveListener(DisplayText);
+        _pocket.ValueChanged -= DisplayText;
     }
 
     private void DisplayText(float value)

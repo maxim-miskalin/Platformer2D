@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MoverPlayer : Mover
 {
@@ -12,7 +12,7 @@ public class MoverPlayer : Mover
     private Vector2 _directionMove;
     private float _defualtScaleY;
 
-    public UnityEvent Attacked;
+    public event Action Attacked;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class MoverPlayer : Mover
 
     private void FixedUpdate()
     {
-        if (IsGround && _directionMove.x != 0)
+        if (_checkGround.IsGround && _directionMove.x != 0)
             Move(_directionMove);
 
         if (IsJump)
@@ -38,7 +38,7 @@ public class MoverPlayer : Mover
 
         _directionMove = new(Input.GetAxis(_horizontalInput), this.Rigidbody.velocity.y);
 
-        if (Input.GetButtonDown(_jumpInput) && IsGround)
+        if (Input.GetButtonDown(_jumpInput) && _checkGround.IsGround)
             IsJump = true;
 
         if (Input.GetMouseButtonDown(0))

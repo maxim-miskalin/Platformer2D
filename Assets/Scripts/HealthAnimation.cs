@@ -40,14 +40,14 @@ public class HealthAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.ValueChanged.AddListener(CheckHealth);
-        _health.Died.AddListener(Die);
+        _health.ValueChanged += ChangeHealth;
+        _health.Died += StartDie;
     }
 
     private void OnDisable()
     {
-        _health.ValueChanged.RemoveListener(CheckHealth);
-        _health.Died.RemoveListener(Die);
+        _health.ValueChanged -= ChangeHealth;
+        _health.Died -= StartDie;
     }
 
     private void Start()
@@ -58,9 +58,8 @@ public class HealthAnimation : MonoBehaviour
         _deathColor.a = _deathColorAlfa;
     }
 
-    private void CheckHealth(float current, float max)
+    private void ChangeHealth(float current, float max)
     {
-
         if (_coroutine != null)
             StopCoroutine(_coroutine);
 
@@ -74,22 +73,19 @@ public class HealthAnimation : MonoBehaviour
         _pastValue = current;
     }
 
-    private void Die(Health _)
+    private void StartDie(Health _)
     {
         StopCoroutine(_coroutine);
 
-        StartCoroutine(DieAnimation());
+        StartCoroutine(Die());
     }
 
-    private IEnumerator DieAnimation()
+    private IEnumerator Die()
     {
         _mover.enabled = false;
         _animator.enabled = false;
         _rigidbody.simulated = false;
-
-        if (_healthBar != null)
-            _healthBar.gameObject.SetActive(false);
-
+        _healthBar.gameObject.SetActive(false);
         transform.rotation = Quaternion.Euler(0, 0, 90f);
         _renderer.color = _deathColor;
         _collider.enabled = false;

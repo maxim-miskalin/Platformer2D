@@ -1,5 +1,3 @@
-using System.Net;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(MoverPlayer))]
@@ -21,12 +19,12 @@ public class AttakPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.Attacked.AddListener(Attack);
+        _player.Attacked += Attack;
     }
 
     private void OnDisable()
     {
-        _player.Attacked.RemoveListener(Attack);
+        _player.Attacked -= Attack;
     }
 
     private void Attack()

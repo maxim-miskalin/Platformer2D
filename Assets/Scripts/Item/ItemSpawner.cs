@@ -15,22 +15,22 @@ public class ItemSpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CreateCoin());
+        StartCoroutine(CreateItem());
 
         _wait = new(_spawnTime);
     }
 
     private void CreateNewCoin(Item item)
     {
-        item.Disappear.RemoveListener(CreateNewCoin);
-        StartCoroutine(CreateCoin());
+        item.Destroyed += CreateNewCoin;
+        StartCoroutine(CreateItem());
     }
 
-    private IEnumerator CreateCoin()
+    private IEnumerator CreateItem()
     {
         yield return _wait;
 
         Item item = Instantiate(_prefab, transform);
-        item.Disappear.AddListener(CreateNewCoin);
+        item.Destroyed -= CreateNewCoin;
     }
 }

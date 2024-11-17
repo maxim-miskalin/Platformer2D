@@ -13,6 +13,6 @@ public class HealthKitFinder : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out HealthKit kit))
-            _health.RestoreHealth(kit.ToDestroyed());
+            _health.RestoreValue(kit.Destroy());
     }
 }

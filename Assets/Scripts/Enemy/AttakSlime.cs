@@ -22,12 +22,12 @@ public class AttakSlime : MonoBehaviour
 
     private void OnEnable()
     {
-        _targetDetection.Locate.AddListener(SetTarget);
+        _targetDetection.Locate += SetTarget;
     }
 
     private void OnDisable()
     {
-        _targetDetection.Locate.RemoveListener(SetTarget);
+        _targetDetection.Locate -= SetTarget;
     }
 
     private void Start()
