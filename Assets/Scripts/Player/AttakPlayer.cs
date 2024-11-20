@@ -33,6 +33,7 @@ public class AttakPlayer : MonoBehaviour
         float directionMagnitude = direction.magnitude;
         Vector2 spawn = (_distanceSpawn / directionMagnitude) * direction;
         Fireball fireball = Instantiate(_prefab, (Vector2)transform.position + spawn, Quaternion.identity);
+        fireball.transform.SetParent(transform.parent);
         fireball.SetDirection(direction / directionMagnitude);
     }
 }
