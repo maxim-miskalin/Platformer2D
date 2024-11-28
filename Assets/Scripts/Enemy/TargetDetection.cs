@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class TargetDetection : MonoBehaviour
 {
-    public event Action<Collider2D> Locate;
-
     [SerializeField] private float _detectionRadius = 6f;
     [SerializeField] private LayerMask _playerLayer;
+
+    public event Action<Collider2D> Locate;
 
     private void FixedUpdate()
     {

@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private MoverSlime _greenSlime;
-    [SerializeField] private MoverSlime _orangeSlime;
+    [SerializeField] private MoverSlime[] _slimes;
     [SerializeField] private float _minRandomDelayValue = 5f;
     [SerializeField] private float _maxRandomDelayValue = 15f;
 
     private WaitForSeconds _wait;
     private bool _working = true;
-    private float _thresholdValue = 0.5f;
 
     private void Start()
     {
@@ -33,11 +31,8 @@ public class EnemySpawner : MonoBehaviour
 
     private MoverSlime GetRandomSlime()
     {
-        float random = Random.Range(0f, 1f);
+        int random = Random.Range(0, _slimes.Length - 1);
 
-        if (random < _thresholdValue)
-            return _greenSlime;
-        else
-            return _orangeSlime;
+        return _slimes[random];
     }
 }

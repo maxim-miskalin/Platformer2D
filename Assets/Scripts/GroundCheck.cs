@@ -1,19 +1,21 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class CheckGround : MonoBehaviour
+public class GroundCheck : MonoBehaviour
 {
-    public bool IsGround { get; private set; }
+    private int _numberOccurrences = 0;
+
+    public bool IsGround => _numberOccurrences > 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Ground _))
-            IsGround = true;
+            _numberOccurrences++;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Ground _))
-            IsGround = false;
+            _numberOccurrences--;
     }
 }

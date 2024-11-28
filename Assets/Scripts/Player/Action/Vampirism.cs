@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class Vampirism : MonoBehaviour
 {
+    [SerializeField] private PlayerInput _input;
     [SerializeField] private float _damage = 5f;
     [SerializeField] private float _radius = 6f;
     [SerializeField] private float _timeAction = 6f;
@@ -29,6 +30,16 @@ public class Vampirism : MonoBehaviour
         _player = GetComponent<Health>();
     }
 
+    private void OnEnable()
+    {
+        _input.VampirismActivated += ActivateAbility;
+    }
+
+    private void OnDisable()
+    {
+        _input.VampirismActivated -= ActivateAbility;
+    }
+
     private void Start()
     {
         _wait = new(_delay);
@@ -37,28 +48,28 @@ public class Vampirism : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!_isWork)
+            _coroutine = null;
+
         if (_coroutine != null)
         {
             if (_timeWork >= 0)
-                _timeWork -= Time.deltaTime;
+                _timeWork -= Time.fixedDeltaTime;
 
             ChangedValueTime?.Invoke(_timeWork, _timeAction);
         }
         else
         {
             if (_timeCharging <= _timeAction)
-                _timeCharging += Time.deltaTime;
+                _timeCharging += Time.fixedDeltaTime;
 
             ChangedValueTime?.Invoke(_timeCharging, _timeAction);
         }
     }
 
-    private void Update()
+    private void ActivateAbility()
     {
-        if (!_isWork)
-            _coroutine = null;
-
-        if (Input.GetKeyDown(KeyCode.V) && _timeCharging >= _timeAction)
+        if (_timeCharging >= _timeAction)
         {
             if (_coroutine == null)
             {

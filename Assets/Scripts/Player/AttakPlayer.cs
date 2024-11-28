@@ -3,28 +3,25 @@ using UnityEngine;
 [RequireComponent(typeof(MoverPlayer))]
 public class AttakPlayer : MonoBehaviour
 {
+    [SerializeField] private PlayerInput _input;
     [SerializeField] private Fireball _prefab;
-    [SerializeField] private LayerMask _enemyLayer;
     [SerializeField, Min(1f)] private float _distanceSpawn = 1f;
 
-    private Collider2D _collider;
-    private MoverPlayer _player;
     private Camera _camera;
 
     private void Awake()
     {
-        _player = GetComponent<MoverPlayer>();
         _camera = Camera.main;
     }
 
     private void OnEnable()
     {
-        _player.Attacked += Attack;
+        _input.Attacked += Attack;
     }
 
     private void OnDisable()
     {
-        _player.Attacked -= Attack;
+        _input.Attacked -= Attack;
     }
 
     private void Attack()

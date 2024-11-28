@@ -76,7 +76,7 @@ MonoBehaviour:
   Collider: {fileID: 5803376799440402918}
   Animator: {fileID: 2159647126569017858}
   SpriteRenderer: {fileID: 709963249237481973}
-  _checkGround: {fileID: 8792756433476776301}
+  _groundCheck: {fileID: 8792756433476776301}
   _fallingGravityScale: 3
   _minDistantionToPoint: 0.5
 --- !u!114 &5768407934239834307
@@ -91,9 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b222c342bd7e06840ba3b4d0f375252f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Locate:
-    m_PersistentCalls:
-      m_Calls: []
   _detectionRadius: 6
   _playerLayer:
     serializedVersion: 2
@@ -111,12 +108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxValue: 30
-  ValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  Died:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8704059695249709343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +504,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 966ae843dba0c2c439d13f35f6bc0872, type: 3}
+  m_Script: {fileID: 11500000, guid: 80bd864465727de4cb91124804c41e98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

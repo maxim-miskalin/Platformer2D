@@ -1,24 +1,33 @@
 using System;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MoverPlayer : Mover
 {
+    [SerializeField] private PlayerInput _input;
     [SerializeField] private float _sittingSize = 0.7f;
     [Header("Layers for regurgulation")]
     [SerializeField] private string _nameLayerPlatform = "Platform";
 
     private int _layerPlatform;
 
-    private string _horizontalInput = "Horizontal";
-    private string _jumpInput = "Jump";
     private string _animationMoveX = "MoveX";
 
     private Vector2 _directionMove;
     private float _defualtScaleY;
 
-    public event Action Attacked;
+    private void OnEnable()
+    {
+        _input.Moved += UpdateMove;
+        _input.Jumped += HandleJump;
+        _input.DownSquatted += SitDown;
+    }
+
+    private void OnDisable()
+    {
+        _input.Moved -= UpdateMove;
+        _input.Jumped -= HandleJump;
+        _input.DownSquatted -= SitDown;
+    }
 
     private void Start()
     {
@@ -28,11 +37,8 @@ public class MoverPlayer : Mover
 
     private void FixedUpdate()
     {
-        if (_checkGround.IsGround && _directionMove.x != 0)
+        if (_groundCheck.IsGround && _directionMove.x != 0)
             Move(_directionMove);
-
-        if (IsJump)
-            Jump();
 
         SetGravity();
         LimitVelocity();
@@ -40,23 +46,25 @@ public class MoverPlayer : Mover
 
     private void Update()
     {
-        SitDown();
         TurnToSide();
-
-        _directionMove = new(Input.GetAxis(_horizontalInput), this.Rigidbody.velocity.y);
-
-        if (Input.GetButtonDown(_jumpInput) && _checkGround.IsGround)
-            IsJump = true;
-
-        if (Input.GetMouseButtonDown(0))
-            Attacked.Invoke();
 
         Animator.SetFloat(_animationMoveX, Mathf.Abs(_directionMove.x));
     }
 
-    private void SitDown()
+    private void UpdateMove(float valueMovement)
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        _directionMove = new(valueMovement, this.Rigidbody.velocity.y);
+    }
+
+    private void HandleJump()
+    {
+        if (_groundCheck.IsGround)
+           Jump();
+    }
+
+    private void SitDown(bool isActive)
+    {
+        if (isActive)
         {
             if (!Physics2D.GetIgnoreLayerCollision(gameObject.layer, _layerPlatform))
                 Physics2D.IgnoreLayerCollision(gameObject.layer, _layerPlatform, true);
@@ -74,9 +82,9 @@ public class MoverPlayer : Mover
 
     private void TurnToSide()
     {
-        if (Input.GetAxis(_horizontalInput) < 0)
+        if (_directionMove.x < 0)
             SpriteRenderer.flipX = true;
-        else if (Input.GetAxis(_horizontalInput) > 0)
+        else if (_directionMove.x > 0)
             SpriteRenderer.flipX = false;
     }
 }

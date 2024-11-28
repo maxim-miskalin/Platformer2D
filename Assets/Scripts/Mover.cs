@@ -11,11 +11,9 @@ public class Mover : MonoBehaviour
     [SerializeField] protected CapsuleCollider2D Collider;
     [SerializeField] protected Animator Animator;
     [SerializeField] protected SpriteRenderer SpriteRenderer;
-    [SerializeField] protected CheckGround _checkGround;
+    [SerializeField] protected GroundCheck _groundCheck;
 
     [SerializeField] private float _fallingGravityScale = 3f;
-
-    protected bool IsJump = false;
 
     private float _defualtGravityScale;
 
@@ -34,14 +32,13 @@ public class Mover : MonoBehaviour
     {
         Vector2 velocity = new(Rigidbody.velocity.x, JumpPower);
         Rigidbody.AddForce(velocity, ForceMode2D.Impulse);
-        IsJump = false;
     }
 
     protected void SetGravity()
     {
-        if (!_checkGround.IsGround && Rigidbody.velocity.y < 0)
+        if (!_groundCheck.IsGround && Rigidbody.velocity.y < 0)
             Rigidbody.gravityScale = _fallingGravityScale;
-        else if (_checkGround.IsGround || Rigidbody.velocity.y >= 0)
+        else if (_groundCheck.IsGround || Rigidbody.velocity.y >= 0)
             Rigidbody.gravityScale = _defualtGravityScale;
     }
 

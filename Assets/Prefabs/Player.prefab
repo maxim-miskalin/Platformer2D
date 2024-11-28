@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: -7659737775122724097}
   - component: {fileID: -5029281862843922518}
   - component: {fileID: 4184694955540871667}
+  - component: {fileID: 1600020894144637950}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -198,8 +199,9 @@ MonoBehaviour:
   Collider: {fileID: 6359433517800447756}
   Animator: {fileID: 2128991062463904474}
   SpriteRenderer: {fileID: 8631159927778959257}
-  _checkGround: {fileID: 8110677544517170897}
+  _groundCheck: {fileID: 8110677544517170897}
   _fallingGravityScale: 3
+  _input: {fileID: 1600020894144637950}
   _sittingSize: 0.7
   _nameLayerPlatform: Platform
 --- !u!114 &4265920027668654159
@@ -243,10 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f756418910dc3444a79c2fbf7906b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _input: {fileID: 1600020894144637950}
   _prefab: {fileID: 4867608597404224113, guid: 39e202d2ef5a6c14d82c3a1e87c54868, type: 3}
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
   _distanceSpawn: 1
 --- !u!114 &-7659737775122724097
 MonoBehaviour:
@@ -284,10 +284,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141cdf28509f9ee499585493d454695b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _input: {fileID: 1600020894144637950}
   _damage: 5
   _radius: 6
   _timeAction: 6
   _delay: 0.5
+--- !u!114 &1600020894144637950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360421306439060226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55942577665e96d4987036ea125d2578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _horizontalInput: Horizontal
+  _jumpInput: Jump
+  _mouseScrollWheel: Mouse ScrollWheel
+  _sitDownInput: 304
+  _vampirismInput: 118
 --- !u!1 &8397313199839975667
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vampirism: {fileID: 4184694955540871667}
+  _delay: 0.01
+  _speedAnimation: 0.5
 --- !u!1001 &5249295122256133049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -593,6 +613,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 966ae843dba0c2c439d13f35f6bc0872, type: 3}
+  m_Script: {fileID: 11500000, guid: 80bd864465727de4cb91124804c41e98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

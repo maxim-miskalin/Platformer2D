@@ -39,14 +39,14 @@ public class MoverSlime : Mover
     {
         if (Vector2.Distance(transform.position, _target.position) > _minDistantionToPoint)
         {
-            if (_checkGround.IsGround)
+            if (_groundCheck.IsGround)
             {
                 Vector2 direction = (_target.position - transform.position).normalized;
                 direction.Normalize();
                 Move(direction);
             }
 
-            if (_checkGround.IsGround)
+            if (_groundCheck.IsGround)
                 Jump();
         }
         else

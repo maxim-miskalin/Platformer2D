@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467733abd2bbc9c41acd3910aa18550c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _greenSlime: {fileID: 1506320387845092142, guid: fcbf0883290c7454e83dd9ddd10fcc77, type: 3}
-  _orangeSlime: {fileID: 986972475639944401, guid: d5c2f8af01dead648898df528e0b90b7, type: 3}
+  _slimes:
+  - {fileID: 1506320387845092142, guid: fcbf0883290c7454e83dd9ddd10fcc77, type: 3}
+  - {fileID: 986972475639944401, guid: d5c2f8af01dead648898df528e0b90b7, type: 3}
   _minRandomDelayValue: 15
   _maxRandomDelayValue: 30
 --- !u!1001 &4147706983369977440
